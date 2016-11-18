@@ -8,9 +8,8 @@
     "server": "node server.js"
   },
   "dependencies": {
-    "sharedb": "^0.11.35",
-    "express": "^4.13.4",
     "ot-text": "^1.0.1",
+    "sharedb": "^0.11.35",
     "ws": "^1.0.1"
   }
 }

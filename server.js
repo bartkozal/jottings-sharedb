@@ -2,7 +2,6 @@ var http = require('http');
 var path = require('path');
 var Duplex = require('stream').Duplex;
 var inherits = require('util').inherits;
-var express = require('express');
 var ShareDB = require('sharedb');
 var WebSocketServer = require('ws').Server;
 var otText = require('ot-text');
@@ -11,9 +10,7 @@ ShareDB.types.map['json0'].registerSubtype(otText.type);
 
 var shareDB = ShareDB();
 
-var app = express();
-
-var server = http.createServer(app);
+var server = http.createServer();
 server.listen(7007, function (err) {
   if (err) {
     throw err;
