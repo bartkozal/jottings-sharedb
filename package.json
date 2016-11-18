@@ -1,0 +1,16 @@
+{
+  "name": "jottings-sharedb",
+  "version": "1.0.0",
+  "description": "Jottings ShareDB server",
+  "author": "Bartlomiej Kozal <bkzl@me.com>",
+  "private": true,
+  "scripts": {
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "sharedb": "^0.11.35",
+    "express": "^4.13.4",
+    "ot-text": "^1.0.1",
+    "ws": "^1.0.1"
+  }
+}
