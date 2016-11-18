@@ -1,5 +1,4 @@
 var http = require('http');
-var path = require('path');
 var Duplex = require('stream').Duplex;
 var inherits = require('util').inherits;
 var ShareDB = require('sharedb');
