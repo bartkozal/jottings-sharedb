@@ -10,7 +10,7 @@ ShareDB.types.map['json0'].registerSubtype(otText.type);
 var shareDB = ShareDB();
 
 var server = http.createServer();
-server.listen(7007, function (err) {
+server.listen(5000, function (err) {
   if (err) {
     throw err;
   }

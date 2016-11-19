@@ -5,7 +5,8 @@
   "author": "Bartlomiej Kozal <bkzl@me.com>",
   "private": true,
   "scripts": {
-    "server": "node server.js"
+    "server": "node server.js",
+    "deploy": "git push dokku master"
   },
   "dependencies": {
     "ot-text": "^1.0.1",
