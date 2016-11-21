@@ -1,57 +1,64 @@
-var http = require('http');
-var Duplex = require('stream').Duplex;
-var inherits = require('util').inherits;
-var ShareDB = require('sharedb');
-var WebSocketServer = require('ws').Server;
-var otText = require('ot-text');
+const http = require('http')
+const Duplex = require('stream').Duplex
+const inherits = require('util').inherits
+const ShareDB = require('sharedb')
+const db = require('sharedb-mongo')
+const pubsub = require('sharedb-redis-pubsub')
+const WebSocketServer = require('ws').Server
+const otText = require('ot-text')
 
-ShareDB.types.map['json0'].registerSubtype(otText.type);
+ShareDB.types.map['json0'].registerSubtype(otText.type)
 
-var shareDB = ShareDB();
+const shareDB = ShareDB({
+  db: db('mongodb://localhost:27017/jottings'),
+  pubsub: pubsub({
+    url: 'redis://localhost:6379'
+  })
+})
 
-var server = http.createServer();
+const server = http.createServer()
 server.listen(5000, function (err) {
   if (err) {
-    throw err;
+    throw err
   }
-  console.log('Listening on http://%s:%s', server.address().address, server.address().port);
-});
+  console.log('Listening on http://%s:%s', server.address().address, server.address().port)
+})
 
-var webSocketServer = new WebSocketServer({server: server});
+const webSocketServer = new WebSocketServer({server: server})
 
 webSocketServer.on('connection', function (socket) {
-  var stream = new WebsocketJSONOnWriteStream(socket);
-  shareDB.listen(stream);
-});
+  var stream = new WebsocketJSONOnWriteStream(socket)
+  shareDB.listen(stream)
+})
 
 function WebsocketJSONOnWriteStream(socket) {
-  Duplex.call(this, {objectMode: true});
+  Duplex.call(this, {objectMode: true})
 
-  this.socket = socket;
-  var stream = this;
+  this.socket = socket
+  const stream = this
 
   socket.on('message', function(data) {
-    stream.push(data);
-  });
+    stream.push(data)
+  })
 
   socket.on("close", function() {
-    stream.push(null);
-  });
+    stream.push(null)
+  })
 
   this.on("error", function(msg) {
-    console.warn('WebsocketJSONOnWriteStream error', msg);
-    socket.close();
-  });
+    console.warn('WebsocketJSONOnWriteStream error', msg)
+    socket.close()
+  })
 
   this.on("end", function() {
-    socket.close();
-  });
+    socket.close()
+  })
 }
-inherits(WebsocketJSONOnWriteStream, Duplex);
+inherits(WebsocketJSONOnWriteStream, Duplex)
 
 WebsocketJSONOnWriteStream.prototype._write = function(value, encoding, next) {
-  this.socket.send(JSON.stringify(value));
-  next();
-};
+  this.socket.send(JSON.stringify(value))
+  next()
+}
 
-WebsocketJSONOnWriteStream.prototype._read = function() {};
+WebsocketJSONOnWriteStream.prototype._read = function() {}
