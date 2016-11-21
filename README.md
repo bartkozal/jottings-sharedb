@@ -1,11 +1,11 @@
 # Jottings (ShareDB server)
 
-## How to run
+## Development
 
 ```bash
 # install dependencies
 npm install
 
 # run the server
-npm run server
+npm run dev
 ```
