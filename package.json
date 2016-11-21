@@ -5,7 +5,8 @@
   "author": "Bartlomiej Kozal <bkzl@me.com>",
   "private": true,
   "scripts": {
-    "start": "MONGO_URL=mongodb://localhost:27017/jottings REDIS_URL=redis://localhost:6379 node server.js",
+    "dev": "MONGO_URL=mongodb://localhost:27017/jottings REDIS_URL=redis://localhost:6379 npm start",
+    "start": "node server.js",
     "deploy": "git push dokku master"
   },
   "dependencies": {
