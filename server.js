@@ -9,17 +9,10 @@ const otText = require('ot-text')
 
 ShareDB.types.map['json0'].registerSubtype(otText.type)
 
-// const shareDB = ShareDB({
-//   db: db('mongodb://localhost:27017/jottings'),
-//   pubsub: pubsub({
-//     url: 'redis://localhost:6379'
-//   })
-// })
-
 const shareDB = ShareDB({
-  db: db('mongodb://jottings:832bccbfb902d4132c03ba343495d174@dokku-mongo-jottings:27017/jottings'),
+  db: db(process.env.MONGO_URL),
   pubsub: pubsub({
-    url: 'redis://jottings:5f85bc2c10085f27cc3621b6f5735addd9733adf1c830094e7ee6c9eb73065d5@dokku-redis-jottings:6379'
+    url: process.env.REDIS_URL
   })
 })
 
