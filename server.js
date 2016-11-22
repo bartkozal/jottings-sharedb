@@ -17,11 +17,9 @@ const shareDB = ShareDB({
 })
 
 const server = http.createServer()
-server.listen(5000, function (err) {
-  if (err) {
-    throw err
-  }
-  console.log('Listening on http://%s:%s', server.address().address, server.address().port)
+server.listen(process.env.NODE_PORT, function (err) {
+  if (err) { throw err }
+  console.log("Listening on port " + server.address().port);
 })
 
 const webSocketServer = new WebSocketServer({server: server})
