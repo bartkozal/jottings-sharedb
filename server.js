@@ -22,7 +22,12 @@ server.listen(process.env.NODE_PORT, function (err) {
   console.log("Listening on port " + server.address().port);
 })
 
-const webSocketServer = new WebSocketServer({server: server})
+const webSocketServer = new WebSocketServer({
+  server: server,
+  verifyClient: function(info) {
+    return info.req.headers.origin.includes(process.env.ORIGIN_URL);
+  }
+})
 
 webSocketServer.on('connection', function (socket) {
   var stream = new WebsocketJSONOnWriteStream(socket)
