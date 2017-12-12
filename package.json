@@ -10,11 +10,11 @@
     "deploy": "git push dokku master"
   },
   "dependencies": {
-    "ot-text": "^1.0.1",
-    "sharedb": "^0.11.35",
-    "sharedb-mongo": "^0.8.7",
-    "sharedb-redis-pubsub": "^0.3.1",
-    "ws": "^1.0.1"
+    "ot-text": "1.0.1",
+    "sharedb": "0.11.35",
+    "sharedb-mongo": "0.8.7",
+    "sharedb-redis-pubsub": "0.3.1",
+    "ws": "1.0.1"
   },
   "engines": {
     "node": ">= 4.0.0",
